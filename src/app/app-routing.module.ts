@@ -1,41 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { Grafica1Component } from './pages/grafica1/grafica1.component';
-import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
-import { ProgressComponent } from './pages/progress/progress.component';
+// Modulos
+import { PagesRoutingModule } from './pages/pages.routing';
+import { AuthRoutingModule } from './auth/auth.routing';
 
-import { PagesComponent } from './pages/pages.component';
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
-  //Rutas aplicativo
-  { path: '', 
-    component: PagesComponent,
-    children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'progress', component: ProgressComponent },
-      { path: 'grafica1', component: Grafica1Component },
-      { path: '', component: DashboardComponent },     
-       ]
-    },
+  //** Rutas definidas en cada módulo y definido en la sección imports  PagesRoutingModule, AuthRoutingModule*/
+  // path: '/dashboard' --> definido en PagesRouting
+  // path: '/auth' --> definido en AuthRoutinf
 
-  
-  //Rutas auth
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-
-  // Rutas page no localizada
-  // 
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },     
   { path: '**', component: NopagefoundComponent },
 ]
 
 @NgModule({
   declarations: [],
   imports: [ 
-    RouterModule.forRoot( routes )
-  ],
+    RouterModule.forRoot( routes ),
+    PagesRoutingModule,
+    AuthRoutingModule
+    ],
   exports: [
     RouterModule
   ]
