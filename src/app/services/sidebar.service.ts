@@ -9,9 +9,11 @@ menu: any[] = [{
   titulo: "Dashboard",
   icono: "mdi mdi-gauge",
   submenu: [
-    {titulo: "Principal", url: '/'},
+    {titulo: "Gráficas", url: 'grafica1'},
+    {titulo: "DashBoard", url: '/'},
     {titulo: "ProgressBar", url: 'progress'},
-    {titulo: "Gráficas", url: 'grafica1'}
+    {titulo: "Promesas", url: 'promesas'},
+    {titulo: "Rxjs", url: 'rxjs'}
     ]
 }];
 
