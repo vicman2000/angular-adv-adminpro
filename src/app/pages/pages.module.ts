@@ -4,7 +4,6 @@ import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
 
 // Modulos Owner
-import { NgChartsModule } from 'ng2-charts';
 import { ComponentsModule } from '../components/components.module';
 
 // Componentes
@@ -33,7 +32,6 @@ import { PagesComponent } from './pages.component';
     SharedModule,
     AppRoutingModule,
     ComponentsModule,
-    NgChartsModule
   ]
 })
 export class PagesModule { }
