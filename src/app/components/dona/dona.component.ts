@@ -11,9 +11,9 @@ import { ChartConfiguration } from 'chart.js';
 
 export class DonaComponent implements OnInit {
   ngOnInit()  {
-    console.log('Hola Vicman..: ' + this.titulo);
-    console.log(this.dataValue);
-    console.log(this.dataSetValue);
+    // console.log('Hola Vicman..: ' + this.titulo);
+    // console.log(this.dataValue);
+    // console.log(this.dataSetValue);
     
   }
 
