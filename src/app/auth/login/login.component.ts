@@ -92,7 +92,7 @@ export class LoginComponent implements AfterViewInit {
         },
         error: err => {
           //tu codigo aqui
-          Swal.fire('Logon', err.error.msg || 'Falla al autenticarse','error');
+           Swal.fire('Logon', err.error.msg || 'Falla al autenticarse','error');
         }
       })
   }

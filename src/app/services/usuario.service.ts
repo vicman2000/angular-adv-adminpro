@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
+import { Usuario } from '../models/usuario.model';
+import { valueOrDefault } from 'chart.js/dist/helpers/helpers.core';
 
 declare const google: any;
 declare const gapi: any;
@@ -18,6 +20,7 @@ const baseUrl = environment.base_url;
 export class UsuarioService {
 
   public auth2: any;
+  public usuario: Usuario;
 
   constructor( private http: HttpClient,
               private router: Router) { }
@@ -31,18 +34,19 @@ export class UsuarioService {
     })
   }
 
-  // google.accounts.id.initialize({
-              //   callback: (response:any) => this.ngZone.run( () => this.handleCredentialResponse( response ))
-
-  
 
 
   logout(){
-    localStorage.removeItem('token');
-    
-    google.accounts.id.revoke('victorvicman2000@gmail.com', ()=>{
+    localStorage.removeItem('token');    
+    //console.log('Vicman::: ', this.usuario );
+    if( this.usuario.img.includes('https') )
+    {
+      google.accounts.id.revoke(this.usuario.email, ()=>{
+        this.router.navigateByUrl('/login');
+      });
+    } else{
       this.router.navigateByUrl('/login');
-    });
+    }
   }
 
 
@@ -55,10 +59,13 @@ export class UsuarioService {
           'x-token': token
        }
     }).pipe(
-       tap((resp: any) => {
+       map((resp: any) => {
+        
+          const {nombre, email, img='', google, role, uid } = resp.usuario;
+          this.usuario = new Usuario(nombre, email,'', img, google, role, uid);
           localStorage.setItem('token', resp.token);
+          return true;          
        }),
-       map(resp => true),
        catchError(error => of(false))
     );
  }

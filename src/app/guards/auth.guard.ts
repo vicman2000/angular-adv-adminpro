@@ -18,17 +18,4 @@ export const AuthGuard: CanActivateFn = (route, state) => {
       }
     })
   );
-
-  // return usuarioService.validarToken()
-  // .pipe(
-  //   tap( (resp: any) => {
-  //     localStorage.setItem('token', resp.token );            
-  //   })
-  // );
-  
-
-  // return true;
-
-
-
 };
