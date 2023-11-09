@@ -56,6 +56,7 @@ export class RegisterComponent {
         Swal.fire('Registro', err.error.msg, 'error');
       },
     });
+  
   }
 
   // Valida campos requeridos
