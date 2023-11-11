@@ -18,7 +18,13 @@
                         <label for="exampleInputEmail1">Email address</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-email"></i></div>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" formControlName="email">
+                            <input type="email" 
+                                    class="form-control" 
+                                    id="exampleInputEmail1" 
+                                    placeholder="Enter email" 
+                                    formControlName="email"
+                                    [readOnly]="usuario.google"
+                            >
                         </div>
                     </div>
 
@@ -37,13 +43,46 @@
             <div class="card-body">
                 <h4 class="card-title">Avatar</h4>
                 <h6 class="card-subtitle">Imagen del usuario</h6>
-                <img src="">
-                <input type="file" >
-                <br>
-                <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10 m-t-10">
-                    <i class="fa fa-save"></i> Cambiar imagen
-                </button>
+                <div class="text-center">
+                    <img *ngIf="!imagenTemp" [src]="usuario.imagenUrl" class="img-Avatar">
+                    <img *ngIf="imagenTemp"[src]="imagenTemp" class="img-Avatar">
 
+                </div>
+                <br>
+                <input type="file" (change)="cambiarImagen($any($event.target).files[0])">
+                
+                <br>
+                <div class="col6">
+                    <button type="button" 
+                            class="btn btn-success btn-block waves-effect waves-light m-r-10 m-t-10"
+                            [disabled]="!imagenSubir"
+                            (click)="subirImagen()"
+                            >
+                        <i class="fa fa-save"></i> Cambiar imagen
+                    </button>
+                </div>
+
+                <div class="row">
+                    <!-- <div class="col6">
+                        <button type="button" 
+                                class="btn btn-info btn-block waves-effect waves-light m-r-10 m-t-10 " 
+                                [disabled]="!imagenSubir"
+                                (click)="cancelaSubirImagen()"
+                                >
+                            <i class="fa fa-undo"></i> Deshacer selección
+                        </button>
+                    </div> -->
+                    <!-- <div class="col12">
+                        <button type="button" 
+                                class="btn btn-success btn-block waves-effect waves-light m-r-10 m-t-10"
+                                [disabled]="!imagenSubir"
+                                (click)="subirImagen()"
+                                >
+                            <i class="fa fa-save"></i> Cambiar imagen
+                        </button>
+                    </div> -->
+
+                </div>    
 
             </div>
         </div>
