@@ -48,7 +48,11 @@
                         <tbody>
                             <tr *ngFor="let item of usuarios">
                                 <td class="text-center">
-                                    <img [src]="item.imagenUrl" alt="Avatar de Usuario" class="img-Avatar-Grid w100">
+                                    <img [src]="item.imagenUrl" 
+                                        alt="Avatar de Usuario" 
+                                        class="img-Avatar-Grid w100 cursor"
+                                        (click)="abrirModal( item )"
+                                    >
                                 </td>
 
                                 <td>{{ item.email }}</td>
