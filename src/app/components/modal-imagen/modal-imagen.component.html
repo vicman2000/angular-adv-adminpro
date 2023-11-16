@@ -1,0 +1,36 @@
+<div class="fondo-modal animated fadeIn fast"
+        [class.ocultar-modal]="ocultarModal">
+    <!-- sample modal content -->
+ <div id="responsive-modal" 
+        class="modal fade show" 
+        tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
+        aria-hidden="true" 
+        style="display: block;"
+        >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Cargar imagen</h4>
+                <button type="button" 
+                        class="close" 
+                        data-dismiss="modal" 
+                        aria-hidden="true"
+                        (click)="cerrarModal()"
+                >×</button>
+            </div>
+            <div class="modal-body">
+                <h3>Seleccione una Imagen</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" 
+                        class="btn btn-default waves-effect" 
+                        data-dismiss="modal" 
+                        (click)="cerrarModal()"
+                >Cancelar</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+</div>
