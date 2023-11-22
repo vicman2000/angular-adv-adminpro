@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Médico</h4>
+                <h6 class="card-subtitle">Actualizar información</h6>
+
+                <form class="form p-t-20" [formGroup]="medicoForm" (submit)="guardarMedico()">
+
+                    <div class="form-group row"
+                        *ngIf="medicoSeleccionado">
+
+                        <label for="exampleInputFoto" class="col-sm-3 control-label">Foto</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <img [src]="medicoSeleccionado.img | imagen:'medicos'" alt=""
+                                    class="img-Avatar" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputuname">Nombre</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" formControlName="nombre" class="form-control" id="exampleInputuname"
+                                placeholder="Nombre del Médico">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cmbHospitales">Hospitales</label>
+                        <div class="input-group">
+                            <select class="form-control" formControlName="hospital">
+                                <option value="">Seleccione Hospital</option>
+                                <option *ngFor="let item of hospitales" [value]="item._id">{{ item.nombre }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"
+                        [disabled]="medicoForm.invalid">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                    <!-- <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancelar</button> -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hospital</h4>
+
+                <div *ngIf="hospitalSeleccionado">
+
+                    <h6 class="card-subtitle">{{ hospitalSeleccionado.nombre }}</h6>
+
+                    <div class="form-group row">
+                        <label for="exampleInputFoto" class="col-sm-3 control-label">Foto</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <img [src]="hospitalSeleccionado.img | imagen:'hospitales' " class="img-Avatar" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="!hospitalSeleccionado">
+
+                    <h6 class="card-subtitle">Hospital NO seleccionado...</h6>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label">Foto</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <img [src]="noImageFound" class="img-Avatar" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
