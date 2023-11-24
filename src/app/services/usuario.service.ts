@@ -29,6 +29,10 @@ export class UsuarioService {
     return localStorage.getItem('token') || '';
   }
 
+  get role(): string {  //'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.role;
+  }
+
   get uid(): string {
     return this.usuario.uid || '';
   }
@@ -41,6 +45,7 @@ export class UsuarioService {
     }
   }
 
+
   googleInit() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
@@ -51,17 +56,6 @@ export class UsuarioService {
     });
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    //console.log('Vicman::: ', this.usuario );
-    if (this.usuario.img.includes('https')) {
-      google.accounts.id.revoke(this.usuario.email, () => {
-        this.router.navigateByUrl('/login');
-      });
-    } else {
-      this.router.navigateByUrl('/login');
-    }
-  }
 
   validarToken(): Observable<boolean> {
     return this.http
@@ -74,7 +68,9 @@ export class UsuarioService {
         map((resp: any) => {
           const { nombre, email, img = '', google, role, uid } = resp.usuario;
           this.usuario = new Usuario(nombre, email, '', img, google, role, uid);
-          localStorage.setItem('token', resp.token);
+
+          this.almacenaVarStorage( resp.token, resp.menu );
+          
           return true;
         }),
         catchError((error) => of(false))
@@ -85,7 +81,9 @@ export class UsuarioService {
   crearUsuario(formData: RegisterForm) {
     return this.http.post(`${baseUrl}/usuarios`, formData).pipe(
       tap((resp: any) => {
-        localStorage.setItem('token', resp.token);
+        
+        this.almacenaVarStorage( resp.token, resp.menu );
+
       })
     );
   }
@@ -106,7 +104,9 @@ export class UsuarioService {
   login(formData: LoginForm) {
     return this.http.post(`${baseUrl}/login`, formData).pipe(
       tap((resp: any) => {
-        localStorage.setItem('token', resp.token);
+
+        this.almacenaVarStorage( resp.token, resp.menu );
+
       })
     );
   }
@@ -114,9 +114,33 @@ export class UsuarioService {
   loginGoogle(token: string) {
     return this.http.post(`${baseUrl}/login/google`, { token }).pipe(
       tap((resp: any) => {
-        localStorage.setItem('token', resp.token);
+
+        this.almacenaVarStorage( resp.token, resp.menu );
+
       })
     );
+  }
+
+  logout() {
+    this.removeVarStorage();
+    
+    if (this.usuario.img.includes('https')) {
+      google.accounts.id.revoke(this.usuario.email, () => {
+        this.router.navigateByUrl('/login');
+      });
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
+
+  almacenaVarStorage(pToken: string, pMenu: any ){
+    localStorage.setItem( 'token', pToken );
+    localStorage.setItem( 'menu', JSON.stringify(pMenu)  );
+  }
+
+  removeVarStorage(){
+    localStorage.removeItem( 'token' );
+    localStorage.removeItem( 'menu' );
   }
 
   //#region MANTENIMIENTOS

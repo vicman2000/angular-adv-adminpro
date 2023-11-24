@@ -78,4 +78,12 @@ export class BusquedasService {
     );    
   }
 
+
+  busquedaGlobal( termino: string ){
+    const url = `${baseUrl}/todo/${ termino }`;
+    return this.http.get( url, this.headers );
+
+
+  }
+
 }

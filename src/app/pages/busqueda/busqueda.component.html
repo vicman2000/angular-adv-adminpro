@@ -1,0 +1,121 @@
+<div class="row fade-in fast">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3>Usuarios</h3>
+                <div class="alert alert-info animated fade-in fast"
+                     *ngIf="usuarios.length === 0"   
+                >
+                    <h4 class="alert-heading"> No existen valores que coincidan con la búsqueda </h4>
+                    <p></p>
+                    <p class="mb-0"></p>
+                </div>
+
+                <div class="table-responsive"
+                    *ngIf="usuarios.length > 0"      
+                >
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of usuarios"
+                                class="animated fade-in fast">
+
+                                <td>
+                                    <img [src]="item.img | imagen: 'usuaios' " 
+                                            class="img-Avatar-Grid">
+                                </td>
+                                <td>{{ item.nombre }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3>Hospitales</h3>
+                <div class="alert alert-info animated fade-in fast"
+                     *ngIf="hospitales.length === 0" >
+                    <h4 class="alert-heading"> No existen valores que coincidan con la búsqueda </h4>
+                    <p></p>
+                    <p class="mb-0"></p>
+                </div>
+
+                <div class="table-responsive"
+                    *ngIf="hospitales.length > 0"      
+                >
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of hospitales"
+                                class="animated fade-in fast">
+                                <td>
+                                    <img [src]="item.img | imagen: 'hospitales' " 
+                                            class="img-Avatar-Grid">
+                                </td>
+                                <td>{{ item.nombre }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3>Medicos</h3>
+                <div class="alert alert-info animated fade-in fast"
+                     *ngIf="medicos.length === 0"   
+                >
+                    <h4 class="alert-heading"> No existen valores que coincidan con la búsqueda </h4>
+                    <p></p>
+                    <p class="mb-0"></p>
+                </div>
+
+                <div class="table-responsive"
+                    *ngIf="medicos.length > 0"      
+                >
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of medicos"
+                                class="animated fade-in fast">
+                                <td>
+                                    <img [src]="item.img | imagen: 'medicos' " 
+                                            class="img-Avatar-Grid">
+                                </td>
+                                <td>
+                                    <a [routerLink]="[ '/dashboard/medico/', item._id ]">{{ item.nombre }}</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+</div>
